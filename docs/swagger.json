@@ -8,11 +8,16 @@
         },
         "version": "1.0"
     },
-    "host": "http://localhost:8080",
+    "host": "localhost:8080",
     "basePath": "/api",
     "paths": {
         "/borrowers": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get a list of all borrowers",
                 "produces": [
                     "application/json"
@@ -37,6 +42,11 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new borrower with the provided name",
                 "consumes": [
                     "application/json"
@@ -77,6 +87,11 @@
         },
         "/borrowers/{borrowerID}/loans": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get a list of all loans for a specific borrower",
                 "produces": [
                     "application/json"
@@ -110,6 +125,11 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new loan request for a specific borrower",
                 "produces": [
                     "application/json"
@@ -145,6 +165,11 @@
         },
         "/borrowers/{borrowerID}/loans/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get detailed information about a specific loan",
                 "produces": [
                     "application/json"
@@ -199,6 +224,11 @@
         },
         "/borrowers/{borrowerID}/loans/{loanID}/payments": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get a list of all payments for a specific loan",
                 "produces": [
                     "application/json"
@@ -239,6 +269,11 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Process a payment for a specific loan",
                 "consumes": [
                     "application/json"
@@ -383,6 +418,13 @@
                     "type": "number"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "X-API-Key",
+            "in": "header"
         }
     }
 }

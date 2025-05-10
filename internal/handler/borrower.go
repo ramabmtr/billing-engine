@@ -36,6 +36,7 @@ type CreateBorrowerReqBody struct {
 // @Success 200 {object} lib.Response "Successfully created borrower"
 // @Failure 500 {object} lib.Response "Internal server error"
 // @Router /borrowers [post]
+// @Security ApiKeyAuth
 func (h *BorrowerHandler) Create(c echo.Context) error {
 	var req CreateBorrowerReqBody
 	if err := c.Bind(&req); err != nil {
@@ -61,6 +62,7 @@ func (h *BorrowerHandler) Create(c echo.Context) error {
 // @Success 200 {object} lib.Response "Successfully retrieved borrowers list"
 // @Failure 500 {object} lib.Response "Internal server error"
 // @Router /borrowers [get]
+// @Security ApiKeyAuth
 func (h *BorrowerHandler) List(c echo.Context) error {
 	borrowers, err := h.borrowerSvc.List()
 	if err != nil {

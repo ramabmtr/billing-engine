@@ -20,6 +20,11 @@ const docTemplate = `{
     "paths": {
         "/borrowers": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get a list of all borrowers",
                 "produces": [
                     "application/json"
@@ -44,6 +49,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new borrower with the provided name",
                 "consumes": [
                     "application/json"
@@ -84,6 +94,11 @@ const docTemplate = `{
         },
         "/borrowers/{borrowerID}/loans": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get a list of all loans for a specific borrower",
                 "produces": [
                     "application/json"
@@ -117,6 +132,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new loan request for a specific borrower",
                 "produces": [
                     "application/json"
@@ -152,6 +172,11 @@ const docTemplate = `{
         },
         "/borrowers/{borrowerID}/loans/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get detailed information about a specific loan",
                 "produces": [
                     "application/json"
@@ -206,6 +231,11 @@ const docTemplate = `{
         },
         "/borrowers/{borrowerID}/loans/{loanID}/payments": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get a list of all payments for a specific loan",
                 "produces": [
                     "application/json"
@@ -246,6 +276,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Process a payment for a specific loan",
                 "consumes": [
                     "application/json"
@@ -391,13 +426,20 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "X-API-Key",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "http://localhost:8080",
+	Host:             "localhost:8080",
 	BasePath:         "/api",
 	Schemes:          []string{},
 	Title:            "Billing Engine API",

@@ -22,8 +22,12 @@ import (
 // @contact.name Rama Bramantara
 // @contact.email ramabmtr@gmail.com
 
-// @host http://localhost:8080
+// @host localhost:8080
 // @BasePath /api
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name X-API-Key
 func main() {
 	// init configuration
 	config.InitEnv()

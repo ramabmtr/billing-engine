@@ -34,6 +34,7 @@ func (h *LoanHandler) RegisterRoutes(g *echo.Group) {
 // @Success 200 {object} lib.Response "Successfully created loan request"
 // @Failure 500 {object} lib.Response "Internal server error"
 // @Router /borrowers/{borrowerID}/loans [post]
+// @Security ApiKeyAuth
 func (h *LoanHandler) CreateLoanRequest(c echo.Context) error {
 	borrowerID := c.Param("borrowerID")
 	if borrowerID == "" {
@@ -56,6 +57,7 @@ func (h *LoanHandler) CreateLoanRequest(c echo.Context) error {
 // @Success 200 {object} lib.Response "Successfully retrieved loans list"
 // @Failure 500 {object} lib.Response "Internal server error"
 // @Router /borrowers/{borrowerID}/loans [get]
+// @Security ApiKeyAuth
 func (h *LoanHandler) List(c echo.Context) error {
 	borrowerID := c.Param("borrowerID")
 	if borrowerID == "" {
@@ -84,6 +86,7 @@ type GetLoanRes struct {
 // @Success 200 {object} lib.Response{data=GetLoanRes} "Successfully retrieved loan details"
 // @Failure 500 {object} lib.Response "Internal server error"
 // @Router /borrowers/{borrowerID}/loans/{id} [get]
+// @Security ApiKeyAuth
 func (h *LoanHandler) Detail(c echo.Context) error {
 	id := c.Param("id")
 	if id == "" {

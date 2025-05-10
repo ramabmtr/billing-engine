@@ -59,7 +59,7 @@ definitions:
       total_repayment:
         type: number
     type: object
-host: http://localhost:8080
+host: localhost:8080
 info:
   contact:
     email: ramabmtr@gmail.com
@@ -81,6 +81,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/lib.Response'
+      security:
+      - ApiKeyAuth: []
       summary: List all borrowers
       tags:
       - borrowers
@@ -106,6 +108,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/lib.Response'
+      security:
+      - ApiKeyAuth: []
       summary: Create a new borrower
       tags:
       - borrowers
@@ -129,6 +133,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/lib.Response'
+      security:
+      - ApiKeyAuth: []
       summary: List loans for a borrower
       tags:
       - loans
@@ -151,6 +157,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/lib.Response'
+      security:
+      - ApiKeyAuth: []
       summary: Create a loan request
       tags:
       - loans
@@ -184,6 +192,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/lib.Response'
+      security:
+      - ApiKeyAuth: []
       summary: Get loan details
       tags:
       - loans
@@ -212,6 +222,8 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/lib.Response'
+      security:
+      - ApiKeyAuth: []
       summary: List payments for a loan
       tags:
       - payments
@@ -247,7 +259,14 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/lib.Response'
+      security:
+      - ApiKeyAuth: []
       summary: Make a payment for a loan
       tags:
       - payments
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-Key
+    type: apiKey
 swagger: "2.0"

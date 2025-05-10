@@ -39,6 +39,7 @@ type MakePaymentReqBody struct {
 // @Success 200 {object} lib.Response "Successfully processed payment"
 // @Failure 500 {object} lib.Response "Internal server error"
 // @Router /borrowers/{borrowerID}/loans/{loanID}/payments [post]
+// @Security ApiKeyAuth
 func (h *PaymentHandler) MakePayment(c echo.Context) error {
 	loanID := c.Param("loanID")
 	if loanID == "" {
@@ -69,6 +70,7 @@ func (h *PaymentHandler) MakePayment(c echo.Context) error {
 // @Success 200 {object} lib.Response "Successfully retrieved payments list"
 // @Failure 500 {object} lib.Response "Internal server error"
 // @Router /borrowers/{borrowerID}/loans/{loanID}/payments [get]
+// @Security ApiKeyAuth
 func (h *PaymentHandler) List(c echo.Context) error {
 	loanID := c.Param("loanID")
 	if loanID == "" {

@@ -1,0 +1,388 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Billing Engine API",
+        "contact": {
+            "name": "Rama Bramantara",
+            "email": "ramabmtr@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "host": "http://localhost:8080",
+    "basePath": "/api",
+    "paths": {
+        "/borrowers": {
+            "get": {
+                "description": "Get a list of all borrowers",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "borrowers"
+                ],
+                "summary": "List all borrowers",
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved borrowers list",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new borrower with the provided name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "borrowers"
+                ],
+                "summary": "Create a new borrower",
+                "parameters": [
+                    {
+                        "description": "Borrower information",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.CreateBorrowerReqBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully created borrower",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/borrowers/{borrowerID}/loans": {
+            "get": {
+                "description": "Get a list of all loans for a specific borrower",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "loans"
+                ],
+                "summary": "List loans for a borrower",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Borrower ID",
+                        "name": "borrowerID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved loans list",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new loan request for a specific borrower",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "loans"
+                ],
+                "summary": "Create a loan request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Borrower ID",
+                        "name": "borrowerID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully created loan request",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/borrowers/{borrowerID}/loans/{id}": {
+            "get": {
+                "description": "Get detailed information about a specific loan",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "loans"
+                ],
+                "summary": "Get loan details",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Borrower ID",
+                        "name": "borrowerID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Loan ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved loan details",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/lib.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/handler.GetLoanRes"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/borrowers/{borrowerID}/loans/{loanID}/payments": {
+            "get": {
+                "description": "Get a list of all payments for a specific loan",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "payments"
+                ],
+                "summary": "List payments for a loan",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Borrower ID",
+                        "name": "borrowerID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Loan ID",
+                        "name": "loanID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved payments list",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Process a payment for a specific loan",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "payments"
+                ],
+                "summary": "Make a payment for a loan",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Borrower ID",
+                        "name": "borrowerID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Loan ID",
+                        "name": "loanID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Payment information",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.MakePaymentReqBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully processed payment",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/lib.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "handler.CreateBorrowerReqBody": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.GetLoanRes": {
+            "type": "object",
+            "properties": {
+                "loan": {
+                    "$ref": "#/definitions/model.Loan"
+                },
+                "outstanding_amount": {
+                    "type": "number"
+                }
+            }
+        },
+        "handler.MakePaymentReqBody": {
+            "type": "object",
+            "required": [
+                "amount"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "number"
+                }
+            }
+        },
+        "lib.Response": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.Borrower": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.Loan": {
+            "type": "object",
+            "properties": {
+                "annual_interest_rate": {
+                    "type": "number"
+                },
+                "borrower": {
+                    "$ref": "#/definitions/model.Borrower"
+                },
+                "borrower_id": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "period": {
+                    "type": "integer"
+                },
+                "period_unit": {
+                    "type": "string"
+                },
+                "principal": {
+                    "type": "number"
+                },
+                "total_repayment": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

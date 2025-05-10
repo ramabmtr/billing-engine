@@ -1,0 +1,253 @@
+basePath: /api
+definitions:
+  handler.CreateBorrowerReqBody:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  handler.GetLoanRes:
+    properties:
+      loan:
+        $ref: '#/definitions/model.Loan'
+      outstanding_amount:
+        type: number
+    type: object
+  handler.MakePaymentReqBody:
+    properties:
+      amount:
+        type: number
+    required:
+    - amount
+    type: object
+  lib.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+  model.Borrower:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  model.Loan:
+    properties:
+      annual_interest_rate:
+        type: number
+      borrower:
+        $ref: '#/definitions/model.Borrower'
+      borrower_id:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      period:
+        type: integer
+      period_unit:
+        type: string
+      principal:
+        type: number
+      total_repayment:
+        type: number
+    type: object
+host: http://localhost:8080
+info:
+  contact:
+    email: ramabmtr@gmail.com
+    name: Rama Bramantara
+  title: Billing Engine API
+  version: "1.0"
+paths:
+  /borrowers:
+    get:
+      description: Get a list of all borrowers
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved borrowers list
+          schema:
+            $ref: '#/definitions/lib.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/lib.Response'
+      summary: List all borrowers
+      tags:
+      - borrowers
+    post:
+      consumes:
+      - application/json
+      description: Create a new borrower with the provided name
+      parameters:
+      - description: Borrower information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateBorrowerReqBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully created borrower
+          schema:
+            $ref: '#/definitions/lib.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/lib.Response'
+      summary: Create a new borrower
+      tags:
+      - borrowers
+  /borrowers/{borrowerID}/loans:
+    get:
+      description: Get a list of all loans for a specific borrower
+      parameters:
+      - description: Borrower ID
+        in: path
+        name: borrowerID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved loans list
+          schema:
+            $ref: '#/definitions/lib.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/lib.Response'
+      summary: List loans for a borrower
+      tags:
+      - loans
+    post:
+      description: Create a new loan request for a specific borrower
+      parameters:
+      - description: Borrower ID
+        in: path
+        name: borrowerID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully created loan request
+          schema:
+            $ref: '#/definitions/lib.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/lib.Response'
+      summary: Create a loan request
+      tags:
+      - loans
+  /borrowers/{borrowerID}/loans/{id}:
+    get:
+      description: Get detailed information about a specific loan
+      parameters:
+      - description: Borrower ID
+        in: path
+        name: borrowerID
+        required: true
+        type: string
+      - description: Loan ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved loan details
+          schema:
+            allOf:
+            - $ref: '#/definitions/lib.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/handler.GetLoanRes'
+              type: object
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/lib.Response'
+      summary: Get loan details
+      tags:
+      - loans
+  /borrowers/{borrowerID}/loans/{loanID}/payments:
+    get:
+      description: Get a list of all payments for a specific loan
+      parameters:
+      - description: Borrower ID
+        in: path
+        name: borrowerID
+        required: true
+        type: string
+      - description: Loan ID
+        in: path
+        name: loanID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved payments list
+          schema:
+            $ref: '#/definitions/lib.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/lib.Response'
+      summary: List payments for a loan
+      tags:
+      - payments
+    post:
+      consumes:
+      - application/json
+      description: Process a payment for a specific loan
+      parameters:
+      - description: Borrower ID
+        in: path
+        name: borrowerID
+        required: true
+        type: string
+      - description: Loan ID
+        in: path
+        name: loanID
+        required: true
+        type: string
+      - description: Payment information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.MakePaymentReqBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully processed payment
+          schema:
+            $ref: '#/definitions/lib.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/lib.Response'
+      summary: Make a payment for a loan
+      tags:
+      - payments
+swagger: "2.0"

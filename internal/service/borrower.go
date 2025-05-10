@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github/ramabmtr/billing-engine/internal/model"
-	"github/ramabmtr/billing-engine/internal/repository"
+	"github.com/ramabmtr/billing-engine/internal/model"
+	"github.com/ramabmtr/billing-engine/internal/repository"
 )
 
 type BorrowerService struct {

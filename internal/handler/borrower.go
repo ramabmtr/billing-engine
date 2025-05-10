@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github/ramabmtr/billing-engine/internal/lib"
-	"github/ramabmtr/billing-engine/internal/service"
+	"github.com/ramabmtr/billing-engine/internal/lib"
+	"github.com/ramabmtr/billing-engine/internal/service"
 )
 
 type BorrowerHandler struct {

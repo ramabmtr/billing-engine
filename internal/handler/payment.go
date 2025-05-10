@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/ramabmtr/billing-engine/internal/lib"
+	"github.com/ramabmtr/billing-engine/internal/service"
 	"github.com/shopspring/decimal"
-	"github/ramabmtr/billing-engine/internal/lib"
-	"github/ramabmtr/billing-engine/internal/service"
 )
 
 type PaymentHandler struct {

@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github/ramabmtr/billing-engine/config"
-	"github/ramabmtr/billing-engine/internal/model"
+	"github.com/ramabmtr/billing-engine/config"
+	"github.com/ramabmtr/billing-engine/internal/model"
 )
 
 func main() {

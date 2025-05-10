@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github/ramabmtr/billing-engine/internal/constant"
-	"github/ramabmtr/billing-engine/internal/model"
+	"github.com/ramabmtr/billing-engine/internal/constant"
+	"github.com/ramabmtr/billing-engine/internal/model"
 	"gorm.io/gorm"
 )
 

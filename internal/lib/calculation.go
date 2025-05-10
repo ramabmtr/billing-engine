@@ -1,8 +1,8 @@
 package lib
 
 import (
+	"github.com/ramabmtr/billing-engine/internal/constant"
 	"github.com/shopspring/decimal"
-	"github/ramabmtr/billing-engine/internal/constant"
 )
 
 var periodToYears = map[constant.LoanPeriodUnit]decimal.Decimal{

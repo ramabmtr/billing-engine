@@ -1,4 +1,4 @@
-module github/ramabmtr/billing-engine
+module github.com/ramabmtr/billing-engine
 
 go 1.24
 

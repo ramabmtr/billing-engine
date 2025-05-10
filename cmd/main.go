@@ -8,12 +8,12 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/ramabmtr/billing-engine/config"
+	_ "github.com/ramabmtr/billing-engine/docs"
+	"github.com/ramabmtr/billing-engine/internal/handler"
+	"github.com/ramabmtr/billing-engine/internal/repository"
+	"github.com/ramabmtr/billing-engine/internal/service"
 	"github.com/swaggo/echo-swagger"
-	"github/ramabmtr/billing-engine/config"
-	_ "github/ramabmtr/billing-engine/docs"
-	"github/ramabmtr/billing-engine/internal/handler"
-	"github/ramabmtr/billing-engine/internal/repository"
-	"github/ramabmtr/billing-engine/internal/service"
 )
 
 // @title Billing Engine API

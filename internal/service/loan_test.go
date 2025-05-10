@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github/ramabmtr/billing-engine/internal/constant"
-	"github/ramabmtr/billing-engine/internal/model"
-	"github/ramabmtr/billing-engine/internal/repository"
+	"github.com/ramabmtr/billing-engine/internal/constant"
+	"github.com/ramabmtr/billing-engine/internal/model"
+	"github.com/ramabmtr/billing-engine/internal/repository"
 
 	"github.com/google/uuid"
 	"github.com/shopspring/decimal"

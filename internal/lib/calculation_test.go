@@ -3,9 +3,9 @@ package lib
 import (
 	"testing"
 
+	"github.com/ramabmtr/billing-engine/internal/constant"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"
-	"github/ramabmtr/billing-engine/internal/constant"
 )
 
 func TestCalculateTotalRepayment(t *testing.T) {

@@ -4,9 +4,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/ramabmtr/billing-engine/internal/constant"
+	"github.com/ramabmtr/billing-engine/internal/lib"
 	"github.com/shopspring/decimal"
-	"github/ramabmtr/billing-engine/internal/constant"
-	"github/ramabmtr/billing-engine/internal/lib"
 	"gorm.io/gorm"
 )
 
